@@ -8,8 +8,23 @@ from django.shortcuts import render
 
 def hello(request):
     bands = Band.objects.all()
-    return render(request, 'listings/hello.html',
+    return render(request, 'listings/band_list.html',
                   {'bands': bands})
+
+
+def band_list(request):
+    # Récupère tous les objets Band
+    bands = Band.objects.all()
+    return render(request, 'listings/band_list.html', {'bands': bands})
+
+
+def band_detail(request, id):
+    # nous insérons cette ligne pour obtenir le Band avec cet id
+    band = Band.objects.get(id=id)
+    return render(request,
+                  'listings/band_detail.html',
+                  # nous mettons à jour cette ligne pour passer le groupe au gabarit
+                  {'band': band})
 
 
 def about(request):
